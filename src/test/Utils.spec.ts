@@ -26,6 +26,18 @@ describe("Utils test suite", () => {
                 sut.toUpperCase("");
             }).toThrow("Invalid!");
         });
+
+        it("Should throw error on invalid argument - try catch block", (done) => {
+            // the issue with try catch test is that if the throw is removed from the function it will still pass the test because they will not hit the catch block.
+            try {
+                sut.toUpperCase("");
+                done("argument should be of valid string");
+            } catch (error) {
+                expect(error).toBeInstanceOf(Error);
+                expect(error).toHaveProperty("message", "Invalid!");
+                done();
+            }
+        });
     });
 
     test("should return uppercase", () => {
