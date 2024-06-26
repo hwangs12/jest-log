@@ -1,0 +1,6 @@
+Structure of a properly written unit test:
+AAA principles: - arrange - act - assert
+
+    Setup
+
+    Teardown
