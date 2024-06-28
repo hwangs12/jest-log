@@ -6,16 +6,25 @@ describe("Utils test suite", () => {
 
         beforeEach(() => {
             sut = new StringUtils();
-            console.log("Setup");
-        });
-
-        afterEach(() => {
-            console.log("Teardown");
         });
 
         it("Should return correct upperCase", () => {
             const actual = sut.toUpperCase("abc");
             expect(actual).toBe("ABC");
+        });
+
+        it("Should throw error on invalid argument - function", () => {
+            function expectError() {
+                const actual = sut.toUpperCase("");
+            }
+            expect(expectError).toThrow();
+            expect(expectError).toThrow("Invalid!");
+        });
+
+        it("Should throw error on invalid argument - arrow function", () => {
+            expect(() => {
+                sut.toUpperCase("");
+            }).toThrow("Invalid!");
         });
     });
 
