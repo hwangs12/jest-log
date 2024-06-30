@@ -10,7 +10,7 @@ describe("Utils test suite", () => {
 
         it.todo("test long strings");
 
-        it.concurrent("Should return correct upperCase", () => {
+        it("Should return correct upperCase", () => {
             const actual = sut.toUpperCase("abc");
             expect(actual).toBe("ABC");
         });
