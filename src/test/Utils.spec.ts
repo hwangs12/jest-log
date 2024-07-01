@@ -8,8 +8,6 @@ describe("Utils test suite", () => {
             sut = new StringUtils();
         });
 
-        it.todo("test long strings");
-
         it("Should return correct upperCase", () => {
             const actual = sut.toUpperCase("abc");
             expect(actual).toBe("ABC");
