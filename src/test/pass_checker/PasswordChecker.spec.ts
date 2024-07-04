@@ -7,8 +7,13 @@ describe("PasswordChecker test suite", () => {
         sut = new PasswordChecker();
     });
 
-    it("Should do nothing for the moment", () => {
+    it("Password with less than 8 chars is invalid", () => {
         const actual = sut.checkPassword("1234567");
         expect(actual).toBe(false);
+    });
+
+    it("Password with more than 8 chars is ok", () => {
+        const actual = sut.checkPassword("12345678");
+        expect(actual).toBe(true);
     });
 });
