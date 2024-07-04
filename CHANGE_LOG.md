@@ -9,3 +9,8 @@
 ## Requirement 2:
 
 -   return the reasons that make a password invalid
+
+## Requirement 3:
+
+-   refactor
+-   Admin password should also contain a number
