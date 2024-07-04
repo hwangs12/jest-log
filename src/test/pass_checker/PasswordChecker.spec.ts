@@ -8,6 +8,7 @@ describe("PasswordChecker test suite", () => {
     });
 
     it("Should do nothing for the moment", () => {
-        sut.checkPassword();
+        const actual = sut.checkPassword("1234567");
+        expect(actual).toBe(false);
     });
 });
