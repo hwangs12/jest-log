@@ -40,3 +40,13 @@ AAA principles: - arrange - act - assert
     -   large values
     -   100% code coverage - not a great indicator
 
+## Test Doubles in jest
+
+-   what they are and why we need thpem
+
+## WHY WE NEED TEST DOUBLES?
+
+-   SOME UNITS AREN'T FAST, OR EASILY ACCESSIBLE
+    -   REPLACE THEM IN TESTS:
+
+REQUEST -> MACHINE -> TEST DB OR DATABASE
