@@ -50,3 +50,8 @@ AAA principles: - arrange - act - assert
     -   REPLACE THEM IN TESTS:
 
 REQUEST -> MACHINE -> TEST DB OR DATABASE
+what are test doubles?
+
+-   pretend objects used ni place of a real object for testing purposes
+-   dummy objecs: passed around but not true
+    fakes: implified working implementation it takes a
