@@ -1,13 +1,34 @@
 import { calculateComplexity, toUpperCaseWithCb } from "../../app/doubles/OtherUtils";
 
 describe("OtherUtils test suite", () => {
-    it("ToUpperCase - calls callback for invalid ", () => {
-        const actual = toUpperCaseWithCb("", () => {});
-        expect(actual).toBe(undefined);
-    });
-    it("ToUpperCase - calls callback for valid argument ", () => {
-        const actual = toUpperCaseWithCb("abc", () => {});
-        expect(actual).toBe("ABC");
+    describe.only("Tracking callbacks", () => {
+        let cbArgs = [];
+        let timesCalled = 0;
+
+        function callbackMock(arg: string) {
+            cbArgs.push(arg);
+            timesCalled++;
+        }
+
+        afterEach(() => {
+            // clear tracking fields
+            cbArgs = [];
+            timesCalled = 0;
+        });
+
+        it("ToUpperCase - calls callback for invalid ", () => {
+            const actual = toUpperCaseWithCb("", callbackMock);
+            expect(actual).toBe(undefined);
+            expect(cbArgs).toContain("invalid argument!");
+            expect(timesCalled).toBe(1);
+        });
+
+        it("ToUpperCase - calls callback for valid argument ", () => {
+            const actual = toUpperCaseWithCb("abc", callbackMock);
+            expect(actual).toBe("ABC");
+            expect(cbArgs).toContain("called function with abc");
+            expect(timesCalled).toBe(1);
+        });
     });
 
     it("Calculates complexity", () => {
