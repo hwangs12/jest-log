@@ -1,7 +1,34 @@
-import { calculateComplexity, toUpperCaseWithCb } from "../../app/doubles/OtherUtils";
+import { OtherStringUtils, calculateComplexity, toUpperCaseWithCb } from "../../app/doubles/OtherUtils";
 
-describe("OtherUtils test suite", () => {
-    describe.only("Tracking callbacks with Jest mocks", () => {
+describe.skip("OtherUtils test suite", () => {
+    describe.only("OtherStringUtils tests with spies", () => {
+        let sut: OtherStringUtils;
+
+        beforeEach(() => {
+            sut = new OtherStringUtils();
+        });
+
+        test("Use a spy to track calls", () => {
+            const toUpperCaseSpy = jest.spyOn(sut, "toUpperCase");
+            sut.toUpperCase("asa");
+            expect(toUpperCaseSpy).toHaveBeenCalledWith("asa");
+        });
+
+        test("User a spy to track calls to other module", () => {
+            const consoleLogSpy = jest.spyOn(console, "log");
+            sut.logString("abc");
+            expect(consoleLogSpy).toHaveBeenCalledWith("abc");
+        });
+
+        test("Use a spy to replace the implementation of a method", () => {
+            jest.spyOn(sut as any, "callExternalService").mockImplementation(() => {
+                console.log("calling mocked implementation!!!");
+            });
+            (sut as any).callExternalService();
+        });
+    });
+
+    describe("Tracking callbacks with Jest mocks", () => {
         // jest mocks are directly injected into system under test.
         // spies are not
         // spies usually track method calls
