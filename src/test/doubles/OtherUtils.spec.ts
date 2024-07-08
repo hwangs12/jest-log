@@ -2,6 +2,10 @@ import { calculateComplexity, toUpperCaseWithCb } from "../../app/doubles/OtherU
 
 describe("OtherUtils test suite", () => {
     describe.only("Tracking callbacks with Jest mocks", () => {
+        // jest mocks are directly injected into system under test.
+        // spies are not
+        // spies usually track method calls
+        // spies keep the original functionality
         const callbackMock = jest.fn();
 
         afterEach(() => {
