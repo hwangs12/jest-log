@@ -1,6 +1,28 @@
 import { calculateComplexity, toUpperCaseWithCb } from "../../app/doubles/OtherUtils";
 
 describe("OtherUtils test suite", () => {
+    describe.only("Tracking callbacks with Jest mocks", () => {
+        const callbackMock = jest.fn();
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
+        it("ToUpperCase - calls callback for invalid ", () => {
+            const actual = toUpperCaseWithCb("", callbackMock);
+            expect(actual).toBe(undefined);
+            expect(callbackMock).toHaveBeenCalledWith("invalid argument!");
+            expect(callbackMock).toHaveBeenCalledTimes(1);
+        });
+
+        it("ToUpperCase - calls callback for valid argument ", () => {
+            const actual = toUpperCaseWithCb("abc", callbackMock);
+            expect(actual).toBe("ABC");
+            expect(callbackMock).toHaveBeenCalledWith("called function with abc");
+            expect(callbackMock).toHaveBeenCalledTimes(1);
+        });
+    });
+
     describe.only("Tracking callbacks", () => {
         let cbArgs = [];
         let timesCalled = 0;
