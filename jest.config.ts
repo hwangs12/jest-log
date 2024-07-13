@@ -8,11 +8,9 @@ const config: Config.InitialOptions = {
     testEnvironment: "node",
     verbose: true,
     collectCoverage: false,
-    // collectCoverageFrom: [
-    //     `${baseDir}/**/*.ts`
-    // ],
+    collectCoverageFrom: [`${baseDir}/**/*.ts`],
     testMatch: [
-        `${baseTestDir}/**/*test.ts`,
+        `${baseTestDir}/**/*.spec.ts`,
         //    `${baseTestDir}/server_app3/ex/**/*test.ts`,
     ],
 };
