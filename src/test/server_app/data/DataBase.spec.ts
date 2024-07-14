@@ -12,6 +12,12 @@ describe("Database test suite", () => {
 
     const fakeId = "1234";
 
+    const someObject = {
+        id: "",
+        name: "someName",
+        color: "blue",
+    };
+
     beforeEach(() => {
         sut = new DataBase<someTypeWithId>();
         jest.spyOn(IdGenerator, "generateRandomId").mockReturnValue(fakeId);
@@ -23,5 +29,12 @@ describe("Database test suite", () => {
         } as any);
 
         expect(actual).toBe(fakeId);
+    });
+
+    test("should get element after insert", async () => {
+        const id = await sut.insert(someObject);
+        const actual = await sut.getBy("id", id);
+
+        expect(actual).toBe(someObject);
     });
 });
