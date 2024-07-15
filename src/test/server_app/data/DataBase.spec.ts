@@ -37,4 +37,11 @@ describe("Database test suite", () => {
 
         expect(actual).toBe(someObject);
     });
+
+    test("should find all elements with the same property", async () => {
+        const id = await sut.insert(someObject);
+        const actual = await sut.getBy("id", id);
+
+        expect(actual).toBe(someObject);
+    });
 });
