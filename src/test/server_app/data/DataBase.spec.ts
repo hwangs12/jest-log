@@ -18,6 +18,12 @@ describe("Database test suite", () => {
         color: "blue",
     };
 
+    const someObject2 = {
+        id: "",
+        name: "someOtherName",
+        color: "blue",
+    };
+
     beforeEach(() => {
         sut = new DataBase<someTypeWithId>();
         jest.spyOn(IdGenerator, "generateRandomId").mockReturnValue(fakeId);
@@ -39,9 +45,13 @@ describe("Database test suite", () => {
     });
 
     test("should find all elements with the same property", async () => {
-        const id = await sut.insert(someObject);
-        const actual = await sut.getBy("id", id);
+        await sut.insert(someObject);
+        await sut.insert(someObject2);
 
-        expect(actual).toBe(someObject);
+        const expected = [someObject, someObject2];
+
+        const actual = await sut.findAllBy("color", "blue");
+
+        expect(actual).toBe(expected);
     });
 });
