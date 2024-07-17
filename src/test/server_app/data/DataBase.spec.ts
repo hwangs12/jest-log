@@ -52,6 +52,6 @@ describe("Database test suite", () => {
 
         const actual = await sut.findAllBy("color", "blue");
 
-        expect(actual).toBe(expected);
+        expect(actual).toEqual(expected);
     });
 });
