@@ -68,12 +68,20 @@ describe("Database test suite", () => {
 
     test("should delete object", async () => {
         const id = await sut.insert(someObject);
-        const expectedColor = "red";
+        await sut.delete(id);
 
-        await sut.update(id, "color", expectedColor);
-        const object = await sut.getBy("id", id);
-        const actualColor = object.color;
+        const actual = await sut.getBy("id", id);
 
-        expect(actualColor).toBe(expectedColor);
+        expect(actual).toBeUndefined();
+    });
+
+    test("get all element", async () => {
+        await sut.insert(someObject);
+        await sut.insert(someObject2);
+        const expected = [someObject, someObject2];
+
+        const actual = await sut.getAllElements();
+
+        expect(actual).toEqual(expected);
     });
 });
