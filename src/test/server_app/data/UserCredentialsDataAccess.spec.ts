@@ -43,4 +43,18 @@ describe("UserCredentialsDataAccess test suite", () => {
         expect(actualId).toBe(someId);
         expect(insertMock).toHaveBeenCalledWith(someAccount);
     });
+
+    test("should get user by id", async () => {
+        getByMock.mockResolvedValueOnce(someAccount);
+        const actualUser = await sut.getUserById(someId);
+        expect(actualUser).toEqual(someAccount);
+        expect(getByMock).toHaveBeenLastCalledWith("id", someId);
+    });
+
+    test("should get user by name", async () => {
+        getByMock.mockResolvedValueOnce(someAccount);
+        const actualUser = await sut.getUserByUserName(someAccount.userName);
+        expect(actualUser).toEqual(someAccount);
+        expect(getByMock).toHaveBeenLastCalledWith("userName", someAccount.userName);
+    });
 });
