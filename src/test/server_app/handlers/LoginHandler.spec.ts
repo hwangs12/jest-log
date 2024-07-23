@@ -2,7 +2,7 @@ import { LoginHandler } from "../../../app/server_app/handlers/LoginHandler";
 import { IncomingMessage, ServerResponse } from "http";
 import { Account } from "../../../app/server_app/model/AuthModel";
 import { Authorizer } from "../../../app/server_app/auth/Authorizer";
-import { HTTP_METHODS } from "../../../app/server_app/model/ServerModel";
+import { HTTP_CODES, HTTP_METHODS } from "../../../app/server_app/model/ServerModel";
 
 const getRequestBodyMock = jest.fn();
 
@@ -34,6 +34,9 @@ describe("Login Handler Test Suite", () => {
     };
 
     const someId = "1234";
+
+    const someToken = "abcd";
+
     beforeEach(() => {
         sut = new LoginHandler(request as IncomingMessage, responseMock as any as ServerResponse, authorizerMock as any as Authorizer);
     });
@@ -45,8 +48,12 @@ describe("Login Handler Test Suite", () => {
     test("should login valid accounts in requests", async () => {
         request.method = HTTP_METHODS.POST;
         getRequestBodyMock.mockResolvedValueOnce(someAccount);
+        authorizerMock.login.mockResolvedValueOnce(someToken);
         await sut.handleRequest();
-        expect(authorizerMock.login).toHaveBeenCalledWith(someAccount.userName, someAccount.password);
+        expect(authorizerMock.login).toBeCalledWith(someAccount.userName, someAccount.password);
+        expect(responseMock.statusCode).toBe(HTTP_CODES.CREATED);
+        expect(responseMock.writeHead).toBeCalledWith(HTTP_CODES.CREATED, { "Content-Type": "application/json" });
+        expect(responseMock.write).toBeCalledWith(JSON.stringify({ token: someToken }));
     });
 
     test("should not login invalid accounts in requests", async () => {});
