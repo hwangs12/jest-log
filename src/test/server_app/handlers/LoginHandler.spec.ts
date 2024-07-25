@@ -45,7 +45,7 @@ describe("Login Handler Test Suite", () => {
         jest.clearAllMocks();
     });
 
-    test("should login valid accounts in requests", async () => {
+    test("should return token for valid accounts in requests", async () => {
         request.method = HTTP_METHODS.POST;
         getRequestBodyMock.mockResolvedValueOnce(someAccount);
         authorizerMock.login.mockResolvedValueOnce(someToken);
@@ -56,7 +56,11 @@ describe("Login Handler Test Suite", () => {
         expect(responseMock.write).toBeCalledWith(JSON.stringify({ token: someToken }));
     });
 
-    test("should not login invalid accounts in requests", async () => {});
+    test("should return not found for invalid accounts in requests", async () => {
+        request.method = HTTP_METHODS.POST;
+        getRequestBodyMock.mockResolvedValueOnce(someAccount);
+        authorizerMock.login.mockResolvedValueOnce(undefined);
+    });
 
     test("should do nothing for not supported http methods", async () => {});
 });
