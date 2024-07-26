@@ -60,6 +60,9 @@ describe("Login Handler Test Suite", () => {
         request.method = HTTP_METHODS.POST;
         getRequestBodyMock.mockResolvedValueOnce(someAccount);
         authorizerMock.login.mockResolvedValueOnce(undefined);
+        await sut.handleRequest();
+
+        expect(authorizerMock.login).toBeCalledWith(someAccount.userName, someAccount.password);
     });
 
     test("should do nothing for not supported http methods", async () => {});
