@@ -63,6 +63,8 @@ describe("Login Handler Test Suite", () => {
         await sut.handleRequest();
 
         expect(authorizerMock.login).toBeCalledWith(someAccount.userName, someAccount.password);
+        expect(responseMock.statusCode).toBe(HTTP_CODES.NOT_fOUND);
+        expect(responseMock.write).toBeCalledWith(JSON.stringify("wrong username or password"));
     });
 
     test("should do nothing for not supported http methods", async () => {});
