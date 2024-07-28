@@ -67,5 +67,16 @@ describe("Login Handler Test Suite", () => {
         expect(responseMock.write).toBeCalledWith(JSON.stringify("wrong username or password"));
     });
 
-    test("should do nothing for not supported http methods", async () => {});
+    test("should return bad request for invalid requests", async () => {
+        request.method = HTTP_METHODS.POST;
+        getRequestBodyMock.mockResolvedValueOnce({});
+        await sut.handleRequest();
+        expect(authorizerMock.login).not.toBeCalled();
+        expect(responseMock.statusCode).toBe(HTTP_CODES.BAD_REQUEST);
+        expect(responseMock.write).toBeCalledWith(JSON.stringify("userName and password required"));
+    });
+    test("should do nothing for not supported http methods", async () => {
+        request.method = HTTP_METHODS.GET;
+        await sut.handleRequest();
+    });
 });
