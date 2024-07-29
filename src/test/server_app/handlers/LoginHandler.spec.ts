@@ -78,5 +78,9 @@ describe("Login Handler Test Suite", () => {
     test("should do nothing for not supported http methods", async () => {
         request.method = HTTP_METHODS.GET;
         await sut.handleRequest();
+
+        expect(responseMock.writeHead).not.toBeCalled();
+        expect(responseMock.write).not.toBeCalled();
+        expect(getRequestBodyMock).not.toBeCalled();
     });
 });
