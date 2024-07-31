@@ -3,6 +3,7 @@ import { IncomingMessage, ServerResponse } from "http";
 import { Account } from "../../../app/server_app/model/AuthModel";
 import { Authorizer } from "../../../app/server_app/auth/Authorizer";
 import { HTTP_CODES, HTTP_METHODS } from "../../../app/server_app/model/ServerModel";
+import { ReservationsDataAccess } from "../../../app/server_app/data/ReservationsDataAccess";
 
 const getRequestBodyMock = jest.fn();
 
@@ -38,7 +39,7 @@ describe("Login Handler Test Suite", () => {
     const someToken = "abcd";
 
     beforeEach(() => {
-        sut = new ReservationsHandler(request as IncomingMessage, responseMock as any as ServerResponse, authorizerMock as any as Authorizer);
+        sut = new ReservationsHandler(request as IncomingMessage, responseMock as any as ServerResponse, authorizerMock as any as Authorizer, ReservationsDataAccess as any as ReservationsDataAccess);
     });
 
     afterEach(() => {

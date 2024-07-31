@@ -5,19 +5,13 @@ import { Reservation } from "../model/ReservationModel";
 import { HTTP_CODES, HTTP_METHODS } from "../model/ServerModel";
 import { getRequestBody } from "../utils/Utils";
 
-
-
 export class ReservationsHandler {
-
     private request: IncomingMessage;
     private response: ServerResponse;
     private authorizer: Authorizer;
     private reservationsDataAccess: ReservationsDataAccess;
 
-    public constructor(request: IncomingMessage,
-        response: ServerResponse,
-        authorizer: Authorizer,
-        reservationsDataAccess: ReservationsDataAccess) {
+    public constructor(request: IncomingMessage, response: ServerResponse, authorizer: Authorizer, reservationsDataAccess: ReservationsDataAccess) {
         this.request = request;
         this.response = response;
         this.authorizer = authorizer;
@@ -28,7 +22,7 @@ export class ReservationsHandler {
         const isAuthorized = await this.isOperationAuthorized();
         if (!isAuthorized) {
             this.response.statusCode = HTTP_CODES.UNAUTHORIZED;
-            this.response.write(JSON.stringify('Unauthorized operation!'));
+            this.response.write(JSON.stringify("Unauthorized operation!"));
             return;
         }
 
@@ -49,9 +43,7 @@ export class ReservationsHandler {
                 default:
                     break;
             }
-        } catch (error) {
-
-        }
+        } catch (error) {}
     }
 
     private async isOperationAuthorized() {
@@ -67,28 +59,28 @@ export class ReservationsHandler {
         const requestBody: Reservation = await getRequestBody(this.request);
         if (!this.isValidReservation(requestBody)) {
             this.response.statusCode = HTTP_CODES.BAD_REQUEST;
-            this.response.write(JSON.stringify('Incomplete reservation!'));
+            this.response.write(JSON.stringify("Incomplete reservation!"));
             return;
         }
 
         const reservationId = await this.reservationsDataAccess.createReservation(requestBody);
         this.response.statusCode = HTTP_CODES.CREATED;
-        this.response.writeHead(HTTP_CODES.CREATED, { 'Content-Type': 'application/json' });
+        this.response.writeHead(HTTP_CODES.CREATED, { "Content-Type": "application/json" });
         this.response.write(JSON.stringify({ reservationId }));
     }
 
     private async handleGet() {
         const id = this.getIdFromUrl();
-        if (id === 'all') {
+        if (id === "all") {
             const allReservations = await this.reservationsDataAccess.getAllReservations();
-            this.response.writeHead(HTTP_CODES.OK, { 'Content-Type': 'application/json' });
+            this.response.writeHead(HTTP_CODES.OK, { "Content-Type": "application/json" });
             this.response.write(JSON.stringify(allReservations));
             return;
         }
         if (id) {
             const reservation = await this.reservationsDataAccess.getReservation(id);
             if (reservation) {
-                this.response.writeHead(HTTP_CODES.OK, { 'Content-Type': 'application/json' });
+                this.response.writeHead(HTTP_CODES.OK, { "Content-Type": "application/json" });
                 this.response.write(JSON.stringify(reservation));
             } else {
                 this.response.statusCode = HTTP_CODES.NOT_fOUND;
@@ -96,9 +88,7 @@ export class ReservationsHandler {
             }
         } else {
             this.response.statusCode = HTTP_CODES.BAD_REQUEST;
-            this.response.write(JSON.stringify(
-                'Please provide an ID!'
-            ));
+            this.response.write(JSON.stringify("Please provide an ID!"));
         }
     }
     private async handlePut() {
@@ -109,19 +99,13 @@ export class ReservationsHandler {
                 const requestBody: Partial<Reservation> = await getRequestBody(this.request);
                 if (this.isValidPartialReservation(requestBody)) {
                     for (const property in requestBody) {
-                        await this.reservationsDataAccess.updateReservation(
-                            id,
-                            property as keyof Reservation,
-                            requestBody[property]
-                        )
+                        await this.reservationsDataAccess.updateReservation(id, property as keyof Reservation, requestBody[property]);
                     }
-                    this.response.writeHead(HTTP_CODES.OK, { 'Content-Type': 'application/json' });
+                    this.response.writeHead(HTTP_CODES.OK, { "Content-Type": "application/json" });
                     this.response.write(JSON.stringify(`Updated ${Object.keys(requestBody)} of reservation ${id}`));
                 } else {
                     this.response.statusCode = HTTP_CODES.BAD_REQUEST;
-                    this.response.write(JSON.stringify(
-                        'Please provide valid fields to update!'
-                    ));
+                    this.response.write(JSON.stringify("Please provide valid fields to update!"));
                 }
             } else {
                 this.response.statusCode = HTTP_CODES.NOT_fOUND;
@@ -129,11 +113,8 @@ export class ReservationsHandler {
             }
         } else {
             this.response.statusCode = HTTP_CODES.BAD_REQUEST;
-            this.response.write(JSON.stringify(
-                'Please provide an ID!'
-            ));
+            this.response.write(JSON.stringify("Please provide an ID!"));
         }
-
     }
     private async handleDelete() {
         const id = this.getIdFromUrl();
@@ -141,19 +122,16 @@ export class ReservationsHandler {
             await this.reservationsDataAccess.deleteReservation(id);
             this.response.statusCode = HTTP_CODES.OK;
             this.response.write(JSON.stringify(`Deleted reservation with id ${id}`));
-
         } else {
             this.response.statusCode = HTTP_CODES.BAD_REQUEST;
-            this.response.write(JSON.stringify(
-                'Please provide an ID!'
-            ));
+            this.response.write(JSON.stringify("Please provide an ID!"));
         }
     }
 
     private getIdFromUrl() {
         const fullRoute = this.request.url;
         if (fullRoute) {
-            return fullRoute.split('/')[2];
+            return fullRoute.split("/")[2];
         }
     }
 
@@ -166,8 +144,8 @@ export class ReservationsHandler {
             id: undefined,
             room: undefined,
             startDate: undefined,
-            user: undefined
-        }
+            user: undefined,
+        };
         const reservationKeys = Object.keys(genericReservation);
         let hasValidKeys = false;
         let hasRightKeys = true;
@@ -190,8 +168,8 @@ export class ReservationsHandler {
             room: undefined,
             startDate: undefined,
             user: undefined,
-            id: undefined
-        }
+            id: undefined,
+        };
         const reservationKeys = Object.keys(genericReservation);
         let hasRightKeys = true;
         for (const key in reservation) {
@@ -201,5 +179,4 @@ export class ReservationsHandler {
         }
         return hasRightKeys;
     }
-
 }
