@@ -28,6 +28,14 @@ describe("Login Handler Test Suite", () => {
         login: jest.fn(),
     };
 
+    const reservationsDataAccessMock = {
+        createReservation: jest.fn(),
+        updateReservation: jest.fn(),
+        deleteReservation: jest.fn(),
+        getReservation: jest.fn(),
+        getAllReservations: jest.fn(),
+    };
+
     const someAccount: Account = {
         id: "",
         password: "somePassword",
@@ -39,7 +47,12 @@ describe("Login Handler Test Suite", () => {
     const someToken = "abcd";
 
     beforeEach(() => {
-        sut = new ReservationsHandler(request as IncomingMessage, responseMock as any as ServerResponse, authorizerMock as any as Authorizer, ReservationsDataAccess as any as ReservationsDataAccess);
+        sut = new ReservationsHandler(
+            request as IncomingMessage,
+            responseMock as any as ServerResponse,
+            authorizerMock as any as Authorizer,
+            reservationsDataAccessMock as any as ReservationsDataAccess
+        );
     });
 
     afterEach(() => {
