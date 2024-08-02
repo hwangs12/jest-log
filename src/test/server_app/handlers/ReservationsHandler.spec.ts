@@ -11,7 +11,7 @@ jest.mock("../../../app/server_app/utils/Utils", () => ({
     getRequestBody: () => getRequestBodyMock(),
 }));
 
-describe("Login Handler Test Suite", () => {
+describe("Reservation Handler Test Suite", () => {
     let sut: ReservationsHandler;
     const request = {
         method: undefined,
