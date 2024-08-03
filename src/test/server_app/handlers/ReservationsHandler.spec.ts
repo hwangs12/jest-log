@@ -15,6 +15,10 @@ describe("Reservation Handler Test Suite", () => {
     let sut: ReservationsHandler;
     const request = {
         method: undefined,
+        headers: {
+            authorization: undefined,
+        },
+        url: undefined,
     };
 
     const responseMock = {
