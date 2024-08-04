@@ -29,7 +29,7 @@ describe("Reservation Handler Test Suite", () => {
 
     const authorizerMock = {
         registerUser: jest.fn(),
-        login: jest.fn(),
+        validateToken: jest.fn(),
     };
 
     const reservationsDataAccessMock = {
