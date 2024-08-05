@@ -1,9 +1,9 @@
-import { ReservationsHandler } from "../../../app/server_app/handlers/ReservationsHandler";
 import { IncomingMessage, ServerResponse } from "http";
-import { Account } from "../../../app/server_app/model/AuthModel";
 import { Authorizer } from "../../../app/server_app/auth/Authorizer";
-import { HTTP_CODES, HTTP_METHODS } from "../../../app/server_app/model/ServerModel";
 import { ReservationsDataAccess } from "../../../app/server_app/data/ReservationsDataAccess";
+import { ReservationsHandler } from "../../../app/server_app/handlers/ReservationsHandler";
+import { Reservation } from "../../../app/server_app/model/ReservationModel";
+import { HTTP_CODES, HTTP_METHODS } from "../../../app/server_app/model/ServerModel";
 
 const getRequestBodyMock = jest.fn();
 
