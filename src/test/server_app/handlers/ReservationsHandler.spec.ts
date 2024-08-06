@@ -40,15 +40,15 @@ describe("Reservation Handler Test Suite", () => {
         getAllReservations: jest.fn(),
     };
 
-    const someAccount: Account = {
-        id: "",
-        password: "somePassword",
-        userName: "someUserName",
+    const someReservation: Reservation = {
+        id: undefined,
+        endDate: new Date().toDateString(),
+        startDate: new Date().toDateString(),
+        room: "someRoom",
+        user: "someUser",
     };
 
-    const someId = "1234";
-
-    const someToken = "abcd";
+    const someReservationId = "1234";
 
     beforeEach(() => {
         sut = new ReservationsHandler(
