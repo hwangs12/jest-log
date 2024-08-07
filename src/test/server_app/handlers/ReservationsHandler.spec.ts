@@ -57,6 +57,7 @@ describe("Reservation Handler Test Suite", () => {
             authorizerMock as any as Authorizer,
             reservationsDataAccessMock as any as ReservationsDataAccess
         );
+        request.headers.authorization = "abcd";
     });
 
     afterEach(() => {
