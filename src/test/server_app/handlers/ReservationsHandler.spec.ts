@@ -58,6 +58,7 @@ describe("Reservation Handler Test Suite", () => {
             reservationsDataAccessMock as any as ReservationsDataAccess
         );
         request.headers.authorization = "abcd";
+        authorizerMock.validateToken.mockResolvedValueOnce(true);
     });
 
     afterEach(() => {
