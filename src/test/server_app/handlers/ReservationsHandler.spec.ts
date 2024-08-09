@@ -63,6 +63,8 @@ describe("Reservation Handler Test Suite", () => {
 
     afterEach(() => {
         jest.clearAllMocks();
+        request.url = undefined;
+        responseMock.statusCode = 0;
     });
 
     test("should return token for valid accounts in requests", async () => {
