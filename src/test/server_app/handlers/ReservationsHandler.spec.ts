@@ -71,5 +71,14 @@ describe("Reservation Handler Test Suite", () => {
         beforeEach(() => {
             request.method = HTTP_METHODS.POST;
         });
+
+        test("should create reservation from valid request", async () => {
+            getRequestBodyMock.mockResolvedValueOnce(someReservation);
+            reservationsDataAccessMock.createReservation.mockResolvedValueOnce(someReservationId);
+
+            await sut.handleRequest();
+
+            expect(responseMock.statusCode).toBe(HTTP_CODES.CREATED);
+        });
     });
 });
