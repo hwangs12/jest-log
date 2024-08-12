@@ -79,6 +79,7 @@ describe("Reservation Handler Test Suite", () => {
             await sut.handleRequest();
 
             expect(responseMock.statusCode).toBe(HTTP_CODES.CREATED);
+            expect(responseMock.writeHead).toBeCalledWith(HTTP_CODES.CREATED, { "Content-Type": "application/json" });
         });
     });
 });
