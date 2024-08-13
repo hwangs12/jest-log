@@ -80,6 +80,7 @@ describe("Reservation Handler Test Suite", () => {
 
             expect(responseMock.statusCode).toBe(HTTP_CODES.CREATED);
             expect(responseMock.writeHead).toBeCalledWith(HTTP_CODES.CREATED, { "Content-Type": "application/json" });
+            expect(responseMock.write).toBeCalledWith(JSON.stringify({ reservationId: someReservationId }));
         });
     });
 });
