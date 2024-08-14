@@ -82,5 +82,11 @@ describe("Reservation Handler Test Suite", () => {
             expect(responseMock.writeHead).toBeCalledWith(HTTP_CODES.CREATED, { "Content-Type": "application/json" });
             expect(responseMock.write).toBeCalledWith(JSON.stringify({ reservationId: someReservationId }));
         });
+
+        test("should not create reservation from invalid request", async () => {
+            getRequestBodyMock.mockResolvedValueOnce({});
+
+            await sut.handleRequest();
+        });
     });
 });
