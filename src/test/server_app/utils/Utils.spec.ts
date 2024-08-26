@@ -8,8 +8,12 @@ const someObject = {
     city: "Paris",
 };
 
+const someObjectAsString = JSON.stringify(someObject);
+
 describe("getRequestBody test suite", () => {
-    test("should return object for valid JS");
-    test("should throw error for invalid JSON");
-    test("should throw error for unexpected error");
+    test("should return object for valid JSON", async () => {
+        requestMock.on.mockImplementation();
+    });
+    test("should throw error for invalid JSON", async () => {});
+    test("should throw error for unexpected error", async () => {});
 });
