@@ -25,7 +25,7 @@ describe("getRequestBody test suite", () => {
 
         const actual = await getRequestBody(requestMock as any as IncomingMessage);
 
-        expect(actual).toEqual(someObjectAsString);
+        expect(actual).toEqual(someObject);
     });
     test("should throw error for invalid JSON", async () => {});
     test("should throw error for unexpected error", async () => {});
