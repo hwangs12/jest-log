@@ -27,6 +27,8 @@ describe("getRequestBody test suite", () => {
 
         expect(actual).toEqual(someObject);
     });
-    test("should throw error for invalid JSON", async () => {});
+    test("should throw error for invalid JSON", async () => {
+        requestMock.on.mockImplementation((event, cb) => {});
+    });
     test("should throw error for unexpected error", async () => {});
 });
