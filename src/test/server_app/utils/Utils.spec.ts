@@ -28,7 +28,15 @@ describe("getRequestBody test suite", () => {
         expect(actual).toEqual(someObject);
     });
     test("should throw error for invalid JSON", async () => {
-        requestMock.on.mockImplementation((event, cb) => {});
+        requestMock.on.mockImplementation((event, cb) => {
+            if (event == "data") {
+                cb("a" + someObjectAsString);
+            } else {
+                cb();
+            }
+        });
+
+        await expect(getRequestBody(requestMock as any)).rejects.toThrow("Unexpected token a in JSON at position 0");
     });
     test("should throw error for unexpected error", async () => {});
 });
