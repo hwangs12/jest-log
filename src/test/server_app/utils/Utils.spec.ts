@@ -38,5 +38,7 @@ describe("getRequestBody test suite", () => {
 
         await expect(getRequestBody(requestMock as any)).rejects.toThrow("Unexpected token 'a'");
     });
-    test("should throw error for unexpected error", async () => {});
+    test("should throw error for unexpected error", async () => {
+        const someError = new Error("Something went wrong!");
+    });
 });
