@@ -41,7 +41,9 @@ describe("getRequestBody test suite", () => {
     test("should throw error for unexpected error", async () => {
         const someError = new Error("Something went wrong!");
         requestMock.on.mockImplementation((event, cb) => {
-            cb(someObjectAsString);
+            if (event == "error") {
+                cb(someObjectAsString);
+            }
         });
     });
 });
