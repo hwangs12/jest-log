@@ -45,5 +45,6 @@ describe("getRequestBody test suite", () => {
                 cb(someObjectAsString);
             }
         });
+        await expect(getRequestBody(requestMock as any)).rejects.toThrow(someError.message);
     });
 });
