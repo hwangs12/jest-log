@@ -42,7 +42,7 @@ describe("getRequestBody test suite", () => {
         const someError = new Error("Something went wrong!");
         requestMock.on.mockImplementation((event, cb) => {
             if (event == "error") {
-                cb(someObjectAsString);
+                cb(someError);
             }
         });
         await expect(getRequestBody(requestMock as any)).rejects.toThrow(someError.message);
