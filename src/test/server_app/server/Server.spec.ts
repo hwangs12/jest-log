@@ -1,8 +1,12 @@
 import { Server } from "../../../app/server_app/server/Server";
 
+const requestMock = {};
+
+const responseMock = {};
+
 jest.mock("http", () => ({
     createServer: (cb: Function) => {
-        cb();
+        cb(requestMock, responseMock);
     },
 }));
 
