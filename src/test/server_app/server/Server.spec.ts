@@ -4,9 +4,12 @@ const requestMock = {};
 
 const responseMock = {};
 
+const serverMock = {};
+
 jest.mock("http", () => ({
     createServer: (cb: Function) => {
         cb(requestMock, responseMock);
+        return serverMock;
     },
 }));
 
