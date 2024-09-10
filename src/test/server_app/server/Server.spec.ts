@@ -1,6 +1,11 @@
 import { Server } from "../../../app/server_app/server/Server";
 
-const requestMock = {};
+const requestMock = {
+    url: "",
+    headers: {
+        "user-agent": "jest",
+    },
+};
 
 const responseMock = {};
 
