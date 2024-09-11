@@ -7,7 +7,10 @@ const requestMock = {
     },
 };
 
-const responseMock = {};
+const responseMock = {
+    end: jest.fn(),
+    writeHead: jest.fn(),
+};
 
 const serverMock = {};
 
