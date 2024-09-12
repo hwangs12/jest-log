@@ -12,7 +12,10 @@ const responseMock = {
     writeHead: jest.fn(),
 };
 
-const serverMock = {};
+const serverMock = {
+    listen: jest.fn(),
+    close: jest.fn(),
+};
 
 jest.mock("http", () => ({
     createServer: (cb: Function) => {
