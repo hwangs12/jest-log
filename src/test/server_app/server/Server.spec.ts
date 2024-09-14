@@ -5,6 +5,9 @@ import { RegisterHandler } from "../../../app/server_app/handlers/RegisterHandle
 import { ReservationsHandler } from "../../../app/server_app/handlers/ReservationsHandler";
 import { Server } from "../../../app/server_app/server/Server";
 
+jest.mock("../../../app/server_app/auth/Authorizer");
+jest.mock("../../../app/server_app/data/ReservationsDataAccess");
+
 const requestMock = {
     url: "",
     headers: {
