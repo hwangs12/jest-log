@@ -7,6 +7,8 @@ import { Server } from "../../../app/server_app/server/Server";
 
 jest.mock("../../../app/server_app/auth/Authorizer");
 jest.mock("../../../app/server_app/data/ReservationsDataAccess");
+jest.mock("../../../app/server_app/handlers/LoginHandler");
+jest.mock("../../../app/server_app/handlers/RegisterHandler");
 
 const requestMock = {
     url: "",
