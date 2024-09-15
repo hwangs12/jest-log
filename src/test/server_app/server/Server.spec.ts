@@ -9,6 +9,7 @@ jest.mock("../../../app/server_app/auth/Authorizer");
 jest.mock("../../../app/server_app/data/ReservationsDataAccess");
 jest.mock("../../../app/server_app/handlers/LoginHandler");
 jest.mock("../../../app/server_app/handlers/RegisterHandler");
+jest.mock("../../../app/server_app/handlers/ReservationsHandler");
 
 const requestMock = {
     url: "",
